@@ -13,6 +13,17 @@ static char **plugindirs    = (char*[]){
 	NULL
 };
 static char *searchengine = "https://searx.ekmekci.me/search?q=";
+static char *externalpipe_sigusr1[] = {"/bin/sh", "-c", "externalpipe_buffer surf_strings_read"};
+
+static char *linkselect_curwin [] = { "/bin/sh", "-c",
+	"surf_linkselect.sh $0 'Link' | xargs -r xprop -id $0 -f _SURF_GO 8s -set _SURF_GO",
+	winid, NULL
+};
+static char *linkselect_newwin [] = { "/bin/sh", "-c",
+	"surf_linkselect $0 'Link (new window)' | xargs -r surf",
+	winid, NULL
+};
+static char *editscreen[] = { "/bin/sh", "-c", "edit_screen", NULL };
 
 /* Webkit default features */
 /* Highest priority value will be used.
@@ -195,6 +206,10 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_m,      toggle,     { .i = Style } },
 
     { MODKEY               , GDK_KEY_Return, spawn,      SETURI("_SURF_GO") },
+
+	{ MODKEY,                GDK_KEY_d, externalpipe, { .v = linkselect_curwin } },
+	{ GDK_SHIFT_MASK|MODKEY, GDK_KEY_d, externalpipe, { .v = linkselect_newwin } },
+	{ MODKEY,                GDK_KEY_o, externalpipe, { .v = editscreen        } },
 };
 
 /* button definitions */
