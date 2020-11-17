@@ -13,6 +13,19 @@ static char **plugindirs    = (char*[]){
 };
 static char *externalpipe_sigusr1[] = {"/bin/sh", "-c", "externalpipe_buffer.sh surf_strings_read"};
 
+static char *linkselect_curwin [] = { "/bin/sh", "-c",
+	"surf_linkselect.sh $0 'Link' | xargs -r xprop -id $0 -f _SURF_GO 8s -set _SURF_GO",
+	winid, NULL
+};
+static char *linkselect_newwin [] = { "/bin/sh", "-c",
+	"surf_linkselect.sh $0 'Link (new window)' | xargs -r surf",
+	winid, NULL
+};
+static char *editscreen[] = { "/bin/sh", "-c", "edit_screen.sh", NULL };
+
+static Key keys[] = {
+}
+
 /* Webkit default features */
 /* Highest priority value will be used.
  * Default parameters are priority 0
@@ -187,6 +200,10 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_b,      toggle,     { .i = ScrollBars } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_t,      toggle,     { .i = StrictTLS } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_m,      toggle,     { .i = Style } },
+
+	{ MODKEY,                GDK_KEY_d, externalpipe, { .v = linkselect_curwin } },
+	{ GDK_SHIFT_MASK|MODKEY, GDK_KEY_d, externalpipe, { .v = linkselect_newwin } },
+	{ MODKEY,                GDK_KEY_o, externalpipe, { .v = editscreen        } },
 };
 
 /* button definitions */
