@@ -11,17 +11,17 @@ static char **plugindirs    = (char*[]){
 	LIBPREFIX "/mozilla/plugins/",
 	NULL
 };
-static char *externalpipe_sigusr1[] = {"/bin/sh", "-c", "externalpipe_buffer.sh surf_strings_read"};
+static char *externalpipe_sigusr1[] = {"/bin/sh", "-c", "externalpipe_buffer surf_strings_read"};
 
 static char *linkselect_curwin [] = { "/bin/sh", "-c",
 	"surf_linkselect.sh $0 'Link' | xargs -r xprop -id $0 -f _SURF_GO 8s -set _SURF_GO",
 	winid, NULL
 };
 static char *linkselect_newwin [] = { "/bin/sh", "-c",
-	"surf_linkselect.sh $0 'Link (new window)' | xargs -r surf",
+	"surf_linkselect $0 'Link (new window)' | xargs -r surf",
 	winid, NULL
 };
-static char *editscreen[] = { "/bin/sh", "-c", "edit_screen.sh", NULL };
+static char *editscreen[] = { "/bin/sh", "-c", "edit_screen", NULL };
 
 static Key keys[] = {
 }
