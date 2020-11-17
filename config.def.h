@@ -11,6 +11,7 @@ static char **plugindirs    = (char*[]){
 	LIBPREFIX "/mozilla/plugins/",
 	NULL
 };
+static char *searchengine = "https://searx.ekmekci.me/search?q=";
 
 /* Webkit default features */
 /* Highest priority value will be used.
