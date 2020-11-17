@@ -179,6 +179,7 @@ static void spawn(Client *c, const Arg *a);
 static void msgext(Client *c, char type, const Arg *a);
 static void destroyclient(Client *c);
 static void cleanup(void);
+static void updatehistory(const char *u, const char *t);
 
 /* GTK/WebKit */
 static WebKitWebView *newview(Client *c, WebKitWebView *rv);
@@ -352,6 +353,7 @@ setup(void)
 
 	/* dirs and files */
 	cookiefile = buildfile(cookiefile);
+	historyfile = buildfile(historyfile);
 	scriptfile = buildfile(scriptfile);
 	certdir    = buildpath(certdir);
 	if (curconfig[Ephemeral].val.i)
@@ -1100,10 +1102,26 @@ cleanup(void)
 	close(spair[0]);
 	close(spair[1]);
 	g_free(cookiefile);
+	g_free(historyfile);
 	g_free(scriptfile);
 	g_free(stylefile);
 	g_free(cachedir);
 	XCloseDisplay(dpy);
+}
+
+void
+updatehistory(const char *u, const char *t)
+{
+	FILE *f;
+	f = fopen(historyfile, "a+");
+
+	char b[20];
+	time_t now = time (0);
+	strftime (b, 20, "%Y-%m-%d %H:%M:%S", localtime (&now));
+	fputs(b, f);
+
+	fprintf(f, " %s %s\n", u, t);
+	fclose(f);
 }
 
 WebKitWebView *
@@ -1557,6 +1575,7 @@ loadchanged(WebKitWebView *v, WebKitLoadEvent e, Client *c)
 		    enablescrollbars ? "auto" : "hidden");
 		*/
 		runscript(c);
+		updatehistory(uri, c->title);
 		break;
 	}
 	updatetitle(c);

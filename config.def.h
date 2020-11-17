@@ -6,6 +6,7 @@ static char *styledir       = "~/.local/share/surf/styles/";
 static char *certdir        = "~/.cache/surf/certificates/";
 static char *cachedir       = "~/.cache/surf/cache/";
 static char *cookiefile     = "~/.cache/surf/cookies.txt";
+static char *historyfile    = "~/.cache/surf/history.txt";
 static char **plugindirs    = (char*[]){
 	"~/.surf/plugins/",
 	LIBPREFIX "/mozilla/plugins/",
@@ -109,6 +110,11 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
         } \
 }
 
+#define SETURI(p)       { .v = (char *[]){ "/bin/sh", "-c", \
+"prop=\"`surf_history_dmenu.sh`\" &&" \
+"xprop -id $1 -f $0 8s -set $0 \"$prop\"", \
+p, winid, NULL } }
+
 /* styles */
 /*
  * The iteration will stop at the first match, beginning at the beginning of
@@ -187,6 +193,8 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_b,      toggle,     { .i = ScrollBars } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_t,      toggle,     { .i = StrictTLS } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_m,      toggle,     { .i = Style } },
+
+    { MODKEY               , GDK_KEY_Return, spawn,      SETURI("_SURF_GO") },
 };
 
 /* button definitions */
