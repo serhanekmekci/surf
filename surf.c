@@ -1547,7 +1547,6 @@ loadchanged(WebKitWebView *v, WebKitLoadEvent e, Client *c)
 		c->title = uri;
 		c->https = c->insecure = 0;
 		seturiparameters(c, uri, loadtransient);
-		updatehistory(uri, c->title);
 		if (c->errorpage)
 			c->errorpage = 0;
 		else
@@ -1557,7 +1556,6 @@ loadchanged(WebKitWebView *v, WebKitLoadEvent e, Client *c)
 		setatom(c, AtomUri, uri);
 		c->title = uri;
 		seturiparameters(c, uri, loadtransient);
-		updatehistory(uri, c->title);
 		break;
 	case WEBKIT_LOAD_COMMITTED:
 		setatom(c, AtomUri, uri);
@@ -1565,7 +1563,6 @@ loadchanged(WebKitWebView *v, WebKitLoadEvent e, Client *c)
 		seturiparameters(c, uri, loadcommitted);
 		c->https = webkit_web_view_get_tls_info(c->view, &c->cert,
 		                                        &c->tlserr);
-		updatehistory(uri, c->title);
 		break;
 	case WEBKIT_LOAD_FINISHED:
 		seturiparameters(c, uri, loadfinished);
