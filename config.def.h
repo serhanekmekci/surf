@@ -190,7 +190,7 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_m,      toggle,     { .i = Style } },
 
 	/* download-console */
-	{ MODKEY,                GDK_KEY_l,      spawndls,   { 0 } },
+	{ GDK_SHIFT_MASK|MODKEY,                GDK_KEY_l,      spawndls,   { 0 } },
 };
 
 /* button definitions */
