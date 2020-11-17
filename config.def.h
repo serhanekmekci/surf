@@ -1,11 +1,11 @@
 /* modifier 0 means no modifier */
 static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
 static char *fulluseragent  = ""; /* Or override the whole user agent string */
-static char *scriptfile     = "~/.surf/script.js";
-static char *styledir       = "~/.surf/styles/";
-static char *certdir        = "~/.surf/certificates/";
-static char *cachedir       = "~/.surf/cache/";
-static char *cookiefile     = "~/.surf/cookies.txt";
+static char *scriptfile     = "~/.local/share/surf/script.js";
+static char *styledir       = "~/.local/share/surf/styles/";
+static char *certdir        = "~/.cache/surf/certificates/";
+static char *cachedir       = "~/.cache/surf/cache/";
+static char *cookiefile     = "~/.cache/surf/cookies.txt";
 static char **plugindirs    = (char*[]){
 	"~/.surf/plugins/",
 	LIBPREFIX "/mozilla/plugins/",
@@ -53,14 +53,14 @@ static Parameter defconfig[ParameterLast] = {
 	[StrictTLS]           =       { { .i = 1 },     },
 	[Style]               =       { { .i = 1 },     },
 	[WebGL]               =       { { .i = 0 },     },
-	[ZoomLevel]           =       { { .f = 1.0 },   },
+	[ZoomLevel]           =       { { .f = 1.2 },   },
 };
 
 static UriParameters uriparams[] = {
-	{ "(://|\\.)suckless\\.org(/|$)", {
-	  [JavaScript] = { { .i = 0 }, 1 },
-	  [Plugins]    = { { .i = 0 }, 1 },
-	}, },
+	//{ "(://|\\.)suckless\\.org(/|$)", {
+	 // [JavaScript] = { { .i = 0 }, 1 },
+	  //[Plugins]    = { { .i = 0 }, 1 },
+	//}, },
 };
 
 /* default window size: width, height */
@@ -124,7 +124,7 @@ static SiteSpecific styles[] = {
  */
 static SiteSpecific certs[] = {
 	/* regexp               file in $certdir */
-	{ "://suckless\\.org/", "suckless.org.crt" },
+	//{ "://suckless\\.org/", "suckless.org.crt" },
 };
 
 #define MODKEY GDK_CONTROL_MASK
