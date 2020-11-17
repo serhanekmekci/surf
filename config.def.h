@@ -1,7 +1,7 @@
 /* modifier 0 means no modifier */
 static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
 static char *fulluseragent  = ""; /* Or override the whole user agent string */
-static char *scriptfile     = "~/.local/share/script.js";
+static char *scriptfile     = "~/.local/share/surf/script.js";
 static char *styledir       = "~/.local/share/surf/styles/";
 static char *certdir        = "~/.cache/surf/certificates/";
 static char *cachedir       = "~/.cache/surf/cache/";
