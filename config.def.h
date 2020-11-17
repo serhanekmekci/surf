@@ -11,6 +11,7 @@ static char **plugindirs    = (char*[]){
 	LIBPREFIX "/mozilla/plugins/",
 	NULL
 };
+static char *externalpipe_sigusr1[] = {"/bin/sh", "-c", "externalpipe_buffer.sh surf_strings_read"};
 
 /* Webkit default features */
 /* Highest priority value will be used.
