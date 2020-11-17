@@ -23,9 +23,6 @@ static char *linkselect_newwin [] = { "/bin/sh", "-c",
 };
 static char *editscreen[] = { "/bin/sh", "-c", "edit_screen", NULL };
 
-static Key keys[] = {
-}
-
 /* Webkit default features */
 /* Highest priority value will be used.
  * Default parameters are priority 0
