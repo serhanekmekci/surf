@@ -581,7 +581,6 @@ loaduri(Client *c, const Arg *a)
 			free(path);
 		} else if (*uri == ' ') {
 			url = g_strdup_printf("%s%s", searchengine, uri + 1);
-		}
 		} else {
 			url = g_strdup_printf("http://%s", uri);
 		}
