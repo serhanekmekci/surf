@@ -73,10 +73,6 @@ static Parameter defconfig[ParameterLast] = {
 };
 
 static UriParameters uriparams[] = {
-	//{ "(://|\\.)suckless\\.org(/|$)", {
-	 // [JavaScript] = { { .i = 0 }, 1 },
-	  //[Plugins]    = { { .i = 0 }, 1 },
-	//}, },
 };
 
 /* default window size: width, height */
