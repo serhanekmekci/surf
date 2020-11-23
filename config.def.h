@@ -124,7 +124,7 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 }
 
 #define SETURI(p)       { .v = (char *[]){ "/bin/sh", "-c", \
-"prop=\"`surf_history_dmenu.sh`\" &&" \
+"prop=\"`cat ~/.cache/surf/history.txt | tac | awk '{print $3}' | dmenu -w $1 -t -t -g 1 -l 5`\" &&" \
 "xprop -id $1 -f $0 8s -set $0 \"$prop\"", \
 p, winid, NULL } }
 
@@ -156,7 +156,7 @@ static SiteSpecific certs[] = {
  */
 static Key keys[] = {
 	/* modifier              keyval          function    arg */
-	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
+//	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
 	{ MODKEY,                GDK_KEY_f,      spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 	{ MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 
@@ -207,7 +207,7 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_t,      toggle,     { .i = StrictTLS } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_m,      toggle,     { .i = Style } },
 
-    { MODKEY               , GDK_KEY_Return, spawn,      SETURI("_SURF_GO") },
+    { MODKEY,                GDK_KEY_g,      spawn,      SETURI("_SURF_GO") },
 
 	{ MODKEY,                GDK_KEY_d, externalpipe, { .v = linkselect_curwin } },
 	{ GDK_SHIFT_MASK|MODKEY, GDK_KEY_d, externalpipe, { .v = linkselect_newwin } },
