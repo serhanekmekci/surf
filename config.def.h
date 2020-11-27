@@ -120,7 +120,7 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
 }
 
 #define SETURI(p)       { .v = (char *[]){ "/bin/sh", "-c", \
-"prop=\"`cat ~/.cache/surf/history.txt | tac | awk '{print $3}' | dmenu -w $1 -t -t -g 1 -l 5`\" &&" \
+"prop=\"`cat ~/.cache/surf/history.txt | tac | awk '{print $3}' | dmenu -w $1 -t -t -g 1 -l 10`\" &&" \
 "xprop -id $1 -f $0 8s -set $0 \"$prop\"", \
 p, winid, NULL } }
 
