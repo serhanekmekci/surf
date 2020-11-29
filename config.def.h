@@ -7,7 +7,7 @@ static char *certdir        = "~/.cache/surf/certificates/";
 static char *cachedir       = "~/.cache/surf/cache/";
 static char *cookiefile     = "~/.cache/surf/cookies.txt";
 static char *historyfile    = "~/.cache/surf/history.txt";
-static char *dldir          = "~/.local/share/surf/downloads/";
+static char *dldir          = "~/.local/share/Downloads/";
 static char *dlstatus       = "~/.cache/surf/dlstatus/";
 static char **plugindirs    = (char*[]){
 
