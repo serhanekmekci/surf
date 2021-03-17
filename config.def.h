@@ -7,8 +7,6 @@ static char *certdir        = "~/.cache/surf/certificates/";
 static char *cachedir       = "~/.cache/surf/cache/";
 static char *cookiefile     = "~/.cache/surf/cookies.txt";
 static char *historyfile    = "~/.cache/surf/history.txt";
-static char *dldir          = "~/.local/share/Downloads/";
-static char *dlstatus       = "~/.cache/surf/dlstatus/";
 static char **plugindirs    = (char*[]){
 
 	"~/.surf/plugins/",
@@ -94,12 +92,13 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
         } \
 }
 
-#define DLSTATUS { \
-		.v = (const char *[]){ "st", "-e", "/bin/sh", "-c",\
-            "while true; do cat $1/* 2>/dev/null || echo \"no hay descargas\";"\
-            "A=; read A; "\
-            "if [ $A = \"clean\" ]; then rm $1/*; fi; clear; done",\
-            "surf-dlstatus", dlstatus, NULL } \
+/* DOWNLOAD(URI, referer) */
+#define DOWNLOAD(u, r) { \
+        .v = (const char *[]){ "st", "-e", "/bin/sh", "-c",\
+             "curl -g -L -J -O -A \"$1\" -b \"$2\" -c \"$2\"" \
+             " -e \"$3\" \"$4\"; read", \
+             "surf-download", useragent, cookiefile, r, u, NULL \
+        } \
 }
 
 /* PLUMB(URI) */
@@ -208,9 +207,6 @@ static Key keys[] = {
 	{ MODKEY,                GDK_KEY_d, externalpipe, { .v = linkselect_curwin } },
 	{ GDK_SHIFT_MASK|MODKEY, GDK_KEY_d, externalpipe, { .v = linkselect_newwin } },
 	{ MODKEY,                GDK_KEY_o, externalpipe, { .v = editscreen        } },
-
-	/* download-console */
-	{ GDK_SHIFT_MASK|MODKEY,                GDK_KEY_l,      spawndls,   { 0 } },
 };
 
 /* button definitions */
